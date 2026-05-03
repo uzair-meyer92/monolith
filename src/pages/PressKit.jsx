@@ -116,7 +116,7 @@ export default function PressKit() {
               Read the full press release for {EXHIBITION.titleLead} {EXHIBITION.titleAccent} — exhibition statement, full list of works, and artist CV.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-              <Button magnetic variant="inverse" onClick={() => navigate('/press-release')}>
+              <Button variant="inverse" onClick={() => navigate('/press-release')}>
                 Read press release →
               </Button>
             </div>

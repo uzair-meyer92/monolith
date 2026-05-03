@@ -17,6 +17,13 @@ import NotFound   from './pages/NotFound.jsx';
 
 import { WORKS } from './data.js';
 
+const KNOWN_ROUTES = new Set([
+  '/', '/exhibition', '/journal', '/visit', '/about',
+  '/press-release', '/press-kit', '/privacy', '/terms',
+]);
+const isKnownRoute = (pathname) =>
+  KNOWN_ROUTES.has(pathname) || pathname.startsWith('/journal/');
+
 /* Code-split the secondary routes to keep the home bundle slim. */
 const Journal        = lazy(() => import('./pages/Journal.jsx'));
 const JournalArticle = lazy(() => import('./pages/JournalArticle.jsx'));
@@ -98,6 +105,16 @@ export default function App() {
     return () => clearTimeout(id);
   }, [location.pathname]);
 
+  /* 404 renders standalone — no navbar, footer, cursor, grain, or progress.
+     Reads as a quiet typographic dead-end. */
+  if (!isKnownRoute(location.pathname)) {
+    return (
+      <ErrorBoundary>
+        <NotFound />
+      </ErrorBoundary>
+    );
+  }
+
   return (
     <ErrorBoundary>
       <div className="grain" />
@@ -118,7 +135,6 @@ export default function App() {
               <Route path="/press-kit"          element={<PageMotion><PressKit /></PageMotion>} />
               <Route path="/privacy"            element={<PageMotion><Privacy /></PageMotion>} />
               <Route path="/terms"              element={<PageMotion><Terms /></PageMotion>} />
-              <Route path="*"                   element={<PageMotion><NotFound /></PageMotion>} />
             </Routes>
           </AnimatePresence>
         </Suspense>

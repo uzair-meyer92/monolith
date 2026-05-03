@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { T, ENQ_EMAIL, VISIT_FAQ, CONTACT } from '../data.js';
+import { T, SRCS, ENQ_EMAIL, VISIT_FAQ, CONTACT } from '../data.js';
+import Photo from '../lib/Photo.jsx';
 import Button from '../lib/Button.jsx';
 import { useReveal } from '../lib/useReveal.js';
 import { useSEO } from '../lib/SEO.jsx';
@@ -26,8 +27,11 @@ const ADMISSION = [
 /* Approx coordinates for 14 Sir Lowry Road, Woodstock, Cape Town. */
 const LAT  = -33.9290;
 const LNG  =  18.4519;
-const ZOOM = 0.006;
-const MAP_SRC = `https://www.openstreetmap.org/export/embed.html?bbox=${LNG - ZOOM},${LAT - ZOOM/2},${LNG + ZOOM},${LAT + ZOOM/2}&layer=mapnik&marker=${LAT},${LNG}`;
+const MIN_SPAN     = 0.0008;
+const MAX_SPAN     = 0.04;
+const DEFAULT_SPAN = 0.006;
+const buildMapSrc = (span) =>
+  `https://www.openstreetmap.org/export/embed.html?bbox=${LNG - span},${LAT - span/2},${LNG + span},${LAT + span/2}&layer=mapnik&marker=${LAT},${LNG}`;
 const MAP_LINK = `https://www.openstreetmap.org/?mlat=${LAT}&mlon=${LNG}#map=18/${LAT}/${LNG}`;
 const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${LAT},${LNG}&destination_place_id=Monolith+Gallery`;
 
@@ -36,6 +40,11 @@ export default function VisitPage() {
   const navigate = useNavigate();
   const ref = useRef(null);
   useReveal(ref);
+
+  /* Map zoom is buttons-only — iframe has pointer-events: none. */
+  const [span, setSpan] = useState(DEFAULT_SPAN);
+  const zoomIn  = () => setSpan((s) => Math.max(s / 2, MIN_SPAN));
+  const zoomOut = () => setSpan((s) => Math.min(s * 2, MAX_SPAN));
 
   useSEO({
     title: 'Visit',
@@ -74,16 +83,20 @@ export default function VisitPage() {
         </p>
 
         {/* Map */}
-        <section data-anim="rv" style={{ marginBottom: 80 }}>
+        <section data-anim="rv" style={{ marginBottom: 40 }}>
           <div className="map-frame">
             <iframe
               title="Map of Monolith Gallery, 14 Sir Lowry Road, Woodstock, Cape Town"
               loading="lazy"
-              src={MAP_SRC}
+              src={buildMapSrc(span)}
               referrerPolicy="no-referrer-when-downgrade"
             />
             <div className="map-pin" aria-hidden="true">
               <span className="map-pin-dot" />
+            </div>
+            <div className="map-controls" role="group" aria-label="Map zoom">
+              <button type="button" onClick={zoomIn}  aria-label="Zoom in"  disabled={span <= MIN_SPAN}>+</button>
+              <button type="button" onClick={zoomOut} aria-label="Zoom out" disabled={span >= MAX_SPAN}>−</button>
             </div>
           </div>
           <div style={{
@@ -96,7 +109,7 @@ export default function VisitPage() {
             }}>
               14 Sir Lowry Road · Woodstock · Cape Town
             </div>
-            <div style={{ display: 'flex', gap: 22 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 22 }}>
               <a href={DIRECTIONS_LINK} target="_blank" rel="noopener noreferrer"
                  className="link-mono" style={{ color: T.black }}>
                 Get directions →
@@ -107,6 +120,42 @@ export default function VisitPage() {
               </a>
             </div>
           </div>
+        </section>
+
+        {/* Building photos — main entrance + exterior */}
+        <section data-anim="rv" className="split-1-1" style={{ gap: 16, marginBottom: 80 }}>
+          <figure style={{ margin: 0 }}>
+            <Photo
+              src={SRCS.entrance} ph="ph-mid"
+              alt="Main entrance to MONOLITH gallery on Sir Lowry Road."
+              filter="grayscale(0.2) contrast(1.05)" hoverable
+              w={1600} h={1067}
+              sizes="(max-width: 1023px) 100vw, 50vw"
+              style={{ aspectRatio: '4/3', width: '100%' }}
+            />
+            <figcaption style={{
+              fontFamily: T.m, fontSize: 9, letterSpacing: '.12em',
+              textTransform: 'uppercase', color: T.label, marginTop: 10,
+            }}>
+              Main entrance
+            </figcaption>
+          </figure>
+          <figure style={{ margin: 0 }}>
+            <Photo
+              src={SRCS.exterior} ph="ph-dark"
+              alt="Exterior of MONOLITH gallery, the converted industrial bay."
+              filter="grayscale(0.2) contrast(1.05)" hoverable
+              w={1600} h={1067}
+              sizes="(max-width: 1023px) 100vw, 50vw"
+              style={{ aspectRatio: '4/3', width: '100%' }}
+            />
+            <figcaption style={{
+              fontFamily: T.m, fontSize: 9, letterSpacing: '.12em',
+              textTransform: 'uppercase', color: T.label, marginTop: 10,
+            }}>
+              Gallery exterior
+            </figcaption>
+          </figure>
         </section>
 
         {/* Visit detail rows */}
@@ -146,7 +195,7 @@ export default function VisitPage() {
                   }}>
                     Walk-ins are welcome for individuals and pairs. Bookings are required for groups of eight or more, and for school and university visits. Please write to the gallery at least two weeks in advance.
                   </p>
-                  <Button magnetic variant="inverse" onClick={openGroupBooking}>
+                  <Button variant="inverse" onClick={openGroupBooking}>
                     Book a group visit →
                   </Button>
                 </div>

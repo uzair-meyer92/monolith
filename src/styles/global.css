@@ -370,10 +370,29 @@ a { color: inherit; }
 .map-frame iframe {
   position: absolute; inset: 0; width: 100%; height: 100%;
   border: 0;
+  /* pointer-events disabled so wheel/drag can't capture page scroll. */
+  pointer-events: none;
   filter: grayscale(0.75) contrast(0.95) sepia(0.05);
   transition: filter 700ms var(--ease-out);
 }
 .map-frame:hover iframe { filter: grayscale(0) contrast(1) sepia(0); }
+.map-controls {
+  position: absolute; right: 12px; bottom: 12px; z-index: 3;
+  display: flex; flex-direction: column;
+  background: var(--color-paper);
+  border: 1px solid var(--color-border);
+}
+.map-controls button {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--color-paper); color: var(--color-black);
+  font-family: var(--font-display); font-size: 18px; font-weight: 300;
+  border: none; cursor: pointer;
+  transition: background var(--t-hover) var(--ease-out), color var(--t-hover) var(--ease-out);
+}
+.map-controls button + button { border-top: 1px solid var(--color-border); }
+.map-controls button:hover:not([disabled]) { background: var(--color-accent); color: var(--color-paper); }
+.map-controls button[disabled] { color: var(--color-border); cursor: not-allowed; }
 .map-pin {
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -100%);

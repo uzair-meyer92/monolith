@@ -228,7 +228,7 @@ export default function WorkDetail({ work, onClose }) {
               </button>
             )}
             <div>
-              <Button magnetic variant="inverse" onClick={openEnquiry}>
+              <Button variant="inverse" onClick={openEnquiry}>
                 Enquire about this work →
               </Button>
             </div>

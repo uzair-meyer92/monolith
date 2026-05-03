@@ -211,7 +211,6 @@ export default function EnquiryModal({ work, kind = 'enquiry', onClose }) {
             <Button
               type="submit"
               variant="inverse"
-              magnetic={canSubmit && status !== 'sending'}
               aria-disabled={!canSubmit || status === 'sending'}
               style={{ marginTop: 8, background: canSubmit ? T.accent : undefined, borderColor: canSubmit ? T.accent : undefined }}>
               {status === 'sending'

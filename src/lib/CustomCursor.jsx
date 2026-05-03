@@ -4,7 +4,10 @@ import { useEffect, useRef } from 'react';
    - default : terracotta dot + thin ring (mixBlendMode difference)
    - button  : ring fills, dot hides
    - input   : ring collapses to a slim caret line
+   Fades out after 2.5s of no movement; reappears on the next move.
    Only attached on hover-capable, fine-pointer devices. */
+
+const IDLE_MS = 2500;
 
 const VARIANTS = {
   default: { dot: 6, ringW: 32, ringH: 32, fill: 'transparent',          radius: '50%' },
@@ -55,10 +58,17 @@ export default function CustomCursor() {
       if (ringRef.current) ringRef.current.style.opacity = v ? '1' : '0';
     };
 
+    let idleTimer;
+    const armIdle = () => {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => setVisible(false), IDLE_MS);
+    };
+
     const move = (e) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
       if (!visibleR.current) setVisible(true);
+      armIdle();
       if (dotRef.current) {
         dotRef.current.style.transform =
           `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
@@ -103,6 +113,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', enter);
       document.documentElement.removeEventListener('mouseleave', leave);
       cancelAnimationFrame(raf);
+      clearTimeout(idleTimer);
     };
   }, []);
 

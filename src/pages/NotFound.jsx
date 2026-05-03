@@ -40,7 +40,7 @@ export default function NotFound() {
           The page you're looking for doesn't exist or has moved. Return to the gallery to continue browsing.
         </p>
         <div style={{ display: 'inline-block' }}>
-          <Button magnetic variant="inverse" onClick={() => navigate('/')}>
+          <Button variant="inverse" onClick={() => navigate('/')}>
             Return to Monolith →
           </Button>
         </div>

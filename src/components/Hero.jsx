@@ -6,9 +6,9 @@ import { T, SRCS, ARTIST, EXHIBITION } from '../data.js';
 import Photo from '../lib/Photo.jsx';
 import Button from '../lib/Button.jsx';
 
-/* Hero — full-bleed Karoo plate with a line-mask H1 reveal, magnetic
-   CTAs, and a subtle parallax on the image. Reduced-motion users get
-   instant content with no transforms. */
+/* Hero — full-bleed Karoo plate with a line-mask H1 reveal and a
+   subtle parallax on the image. Reduced-motion users get instant
+   content with no transforms. */
 export default function Hero() {
   const navigate = useNavigate();
   const ref = useRef(null);
@@ -108,10 +108,10 @@ export default function Hero() {
             {EXHIBITION.dates} · {EXHIBITION.venue}
           </div>
           <div data-anim="hm" style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            <Button magnetic variant="primary" onClick={() => navigate('/#works')}>
+            <Button variant="primary" onClick={() => navigate('/#works')}>
               View Exhibition →
             </Button>
-            <Button magnetic variant="outline-light" onClick={() => navigate('/visit')}>
+            <Button variant="outline-light" onClick={() => navigate('/visit')}>
               Plan Your Visit
             </Button>
           </div>

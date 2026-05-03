@@ -97,7 +97,7 @@ export default function Exhibition() {
                 {EXHIBITION.statement[0]}
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-                <Button magnetic variant="inverse" onClick={() => navigate('/#works')}>
+                <Button variant="inverse" onClick={() => navigate('/#works')}>
                   View exhibition →
                 </Button>
                 <Button variant="outline-dark" onClick={() => navigate(EXHIBITION.pressRelease)}>
