@@ -1,0 +1,3 @@
+/* Trimmed font import — only the weights and italics actually rendered.
+   Fraunces variable on opsz 14..144 to keep optical sizing.            */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,14..144,300;0,14..144,400;1,14..144,300;1,14..144,400&family=Inter:wght@300;400;500&family=DM+Mono:wght@400&display=swap');

@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.vite
+
+# Local env (commit .env.example only)
+.env
+.env.local
+.env.*.local
+
+# Vercel CLI
+.vercel
+
+# Image source masters — too heavy to ship, regenerate via the script
+public/images/_originals
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.idea
