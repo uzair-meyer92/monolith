@@ -13,23 +13,23 @@
 <meta name="author" content="MONOLITH Gallery" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 
-<link rel="canonical" href="https://monolith.gallery/" />
+<link rel="canonical" href="https://monolith-flax-zeta.vercel.app/" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="MONOLITH" />
 <meta property="og:title" content="MONOLITH — Ground Truth" />
 <meta property="og:description" content="A solo exhibition by Thandiwe Mokoena. 6 February – 28 June 2026, Cape Town." />
-<meta property="og:image" content="https://monolith.gallery/images/hero-landscape.jpg" />
-<meta property="og:image:width" content="1800" />
-<meta property="og:image:height" content="1200" />
+<meta property="og:image" content="https://monolith-flax-zeta.vercel.app/images/hero-landscape.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="800" />
 <meta property="og:image:alt" content="Open Karoo landscape under low light." />
-<meta property="og:url" content="https://monolith.gallery/" />
+<meta property="og:url" content="https://monolith-flax-zeta.vercel.app/" />
 <meta property="og:locale" content="en_ZA" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="MONOLITH — Ground Truth" />
 <meta name="twitter:description" content="A solo exhibition by Thandiwe Mokoena. 6 February – 28 June 2026, Cape Town." />
-<meta name="twitter:image" content="https://monolith.gallery/images/hero-landscape.jpg" />
+<meta name="twitter:image" content="https://monolith-flax-zeta.vercel.app/images/hero-landscape.jpg" />
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%230A0A0A'/%3E%3Ctext%20x='16'%20y='23'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='20'%20fill='%23F4F1EC'%20font-weight='300'%3EM%3C/text%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20180%20180'%3E%3Crect%20width='180'%20height='180'%20fill='%230A0A0A'/%3E%3Ctext%20x='90'%20y='128'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='112'%20fill='%23F4F1EC'%20font-weight='300'%3EM%3C/text%3E%3C/svg%3E" />
@@ -44,7 +44,7 @@
   "@context": "https://schema.org",
   "@type": "ArtGallery",
   "name": "MONOLITH",
-  "url": "https://monolith.gallery",
+  "url": "https://monolith-flax-zeta.vercel.app",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "14 Sir Lowry Road",
@@ -62,38 +62,12 @@
 </script>
 
 <style>
-  /* Critical first-paint — paper background, hide cursor flash */
+  /* Critical first-paint — paper background to prevent dark flash. */
   html, body { background: #F4F1EC; margin: 0; }
-  #intro-curtain {
-    position: fixed; inset: 0; z-index: 9000;
-    background: #0A0A0A; color: #F4F1EC;
-    display: flex; align-items: center; justify-content: center;
-    transition: opacity 720ms cubic-bezier(0.16, 1, 0.3, 1) 200ms,
-                visibility 0s linear 920ms;
-    font-family: Georgia, serif; font-weight: 300;
-    letter-spacing: .42em; font-size: 14px; text-transform: uppercase;
-  }
-  #intro-curtain[data-done="true"] { opacity: 0; visibility: hidden; pointer-events: none; }
-  #intro-curtain span { display: inline-block; transform: translateY(0); }
 </style>
 </head>
 <body>
-<div id="intro-curtain" aria-hidden="true"><span>Monolith</span></div>
 <div id="root"></div>
 <script type="module" src="/src/main.jsx"></script>
-<script>
-  /* Lift the curtain after first React paint or 1100ms safety. */
-  (function () {
-    var curtain = document.getElementById('intro-curtain');
-    if (!curtain) return;
-    var lift = function () { curtain.setAttribute('data-done', 'true'); };
-    if (window.requestIdleCallback) {
-      requestIdleCallback(function () { setTimeout(lift, 350); }, { timeout: 1100 });
-    } else {
-      setTimeout(lift, 700);
-    }
-    setTimeout(lift, 1300);
-  })();
-</script>
 </body>
 </html>

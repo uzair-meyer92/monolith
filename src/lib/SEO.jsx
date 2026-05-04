@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SITE = 'https://monolith.gallery';
+const SITE = 'https://monolith-flax-zeta.vercel.app';
 
 function setMeta(attr, key, value) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`);

@@ -33,7 +33,7 @@ export default function JournalArticle({ slug }) {
     author: { '@type': 'Person', name: article.author },
     datePublished: article.date,
     publisher: { '@type': 'Organization', name: 'MONOLITH' },
-    mainEntityOfPage: `https://monolith.gallery/journal/${article.slug || article.id}`,
+    mainEntityOfPage: `https://monolith-flax-zeta.vercel.app/journal/${article.slug || article.id}`,
   } : { '@type': 'WebPage' });
 
   if (!article) return <Navigate to="/journal" replace />;

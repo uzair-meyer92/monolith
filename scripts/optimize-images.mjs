@@ -19,7 +19,7 @@ const BACKUP = 'public/images/_originals';
    Bento:  max tile ≈ 600px → 1200
    Portrait: max in split-1-2 ≈ 600px → 1100 */
 const widths = {
-  'hero-landscape':              1800,
+  'hero-landscape':              1200,
   'artist-portrait':             1100,
   'work-01-oxidised-steel':      1200,
   'work-01-detail':              1200,

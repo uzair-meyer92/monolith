@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://monolith.gallery/</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/exhibition</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/exhibition</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/journal</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/journal</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/journal/notes-on-ground-truth</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/journal/notes-on-ground-truth</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/journal/material-as-document</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/journal/material-as-document</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/visit</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/visit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/about</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/press-release</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/press-release</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/press-kit</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/press-kit</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/privacy</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/privacy</loc>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://monolith.gallery/terms</loc>
+    <loc>https://monolith-flax-zeta.vercel.app/terms</loc>
     <priority>0.3</priority>
   </url>
 </urlset>

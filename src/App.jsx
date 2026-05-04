@@ -85,15 +85,40 @@ export default function App() {
     else navigate(location.pathname + location.search, { replace: true, state: {} });
   };
 
-  /* Body scroll lock + Escape for any open overlay. */
+  /* Body scroll lock that preserves scroll position. Plain `overflow:hidden`
+     on body causes some browsers to reset scroll-y to 0 when the modal opens
+     — fixing the body in place via `position:fixed` + negative top keeps the
+     page exactly where it was. On close, restore styles and scroll back. */
   useEffect(() => {
     if (!work && !enquiryOpen) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const prev = {
+      position: body.style.position,
+      top:      body.style.top,
+      left:     body.style.left,
+      right:    body.style.right,
+      width:    body.style.width,
+      overflow: body.style.overflow,
+    };
+    body.style.position = 'fixed';
+    body.style.top      = `-${scrollY}px`;
+    body.style.left     = '0';
+    body.style.right    = '0';
+    body.style.width    = '100%';
+    body.style.overflow = 'hidden';
+
     const onKey = (e) => { if (e.key === 'Escape') closeModal(); };
     window.addEventListener('keydown', onKey);
+
     return () => {
-      document.body.style.overflow = prevOverflow;
+      body.style.position = prev.position;
+      body.style.top      = prev.top;
+      body.style.left     = prev.left;
+      body.style.right    = prev.right;
+      body.style.width    = prev.width;
+      body.style.overflow = prev.overflow;
+      window.scrollTo(0, scrollY);
       window.removeEventListener('keydown', onKey);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

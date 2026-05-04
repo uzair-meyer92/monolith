@@ -43,9 +43,9 @@ export default function Home() {
       },
     },
     performer: { '@type': 'Person', name: 'Thandiwe Mokoena' },
-    organizer: { '@type': 'Organization', name: 'MONOLITH', url: 'https://monolith.gallery' },
-    image: 'https://monolith.gallery/images/hero-landscape.jpg',
-    url: 'https://monolith.gallery/',
+    organizer: { '@type': 'Organization', name: 'MONOLITH', url: 'https://monolith-flax-zeta.vercel.app' },
+    image: 'https://monolith-flax-zeta.vercel.app/images/hero-landscape.jpg',
+    url: 'https://monolith-flax-zeta.vercel.app/',
   });
 
   useEffect(() => {
