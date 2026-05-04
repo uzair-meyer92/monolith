@@ -48,6 +48,9 @@ export default function Home() {
     url: 'https://monolith-flax-zeta.vercel.app/',
   });
 
+  /* Only react to actual route changes — not modal open/close, which
+     reuse the same pathname+hash with a fresh location.key. Including
+     location.key here would scroll-reset whenever a modal mounts. */
   useEffect(() => {
     if (location.hash === '#works') {
       setCurtain(1);
@@ -60,7 +63,7 @@ export default function Home() {
     }
     window.scrollTo({ top: 0 });
     setCurtain(0);
-  }, [location.pathname, location.hash, location.key]);
+  }, [location.pathname, location.hash]);
 
   return (
     <div>

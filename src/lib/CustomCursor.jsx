@@ -73,6 +73,8 @@ export default function CustomCursor() {
         dotRef.current.style.transform =
           `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
+      /* Restart the lerp loop if it had settled. */
+      if (raf == null) raf = requestAnimationFrame(tick);
     };
 
     const matchVariant = (el) => {
@@ -90,12 +92,20 @@ export default function CustomCursor() {
     document.addEventListener('mouseenter', enter);
     document.documentElement.addEventListener('mouseleave', leave);
 
-    let raf;
+    let raf = null;
     const tick = () => {
       const t = target.current;
       const p = ringPos.current;
-      p.x += (t.x - p.x) * 0.18;
-      p.y += (t.y - p.y) * 0.18;
+      const dx = t.x - p.x;
+      const dy = t.y - p.y;
+      /* Once the ring has caught the dot, stop the loop. The next
+         mousemove restarts it. Saves continuous CPU when idle. */
+      if (Math.abs(dx) < 0.3 && Math.abs(dy) < 0.3) {
+        raf = null;
+        return;
+      }
+      p.x += dx * 0.18;
+      p.y += dy * 0.18;
       if (ringRef.current) {
         ringRef.current.style.transform =
           `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`;
@@ -112,7 +122,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseover', over);
       document.removeEventListener('mouseenter', enter);
       document.documentElement.removeEventListener('mouseleave', leave);
-      cancelAnimationFrame(raf);
+      if (raf != null) cancelAnimationFrame(raf);
       clearTimeout(idleTimer);
     };
   }, []);

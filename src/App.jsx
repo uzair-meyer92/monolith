@@ -112,6 +112,9 @@ export default function App() {
     window.addEventListener('keydown', onKey);
 
     return () => {
+      const html = document.documentElement;
+      const prevHtmlBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
       body.style.position = prev.position;
       body.style.top      = prev.top;
       body.style.left     = prev.left;
@@ -119,6 +122,7 @@ export default function App() {
       body.style.width    = prev.width;
       body.style.overflow = prev.overflow;
       window.scrollTo(0, scrollY);
+      html.style.scrollBehavior = prevHtmlBehavior;
       window.removeEventListener('keydown', onKey);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
